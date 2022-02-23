@@ -1,7 +1,7 @@
 const fs = require("fs");
 const readline = require("readline");
 const {
-  parseAllTokens,
+  parseAll,
   parseByName,
   parseByDate,
   parseByDateAndName,
@@ -18,7 +18,7 @@ const rl = readline.createInterface({ input: rs });
 
 const filterType = FILTER.NONE; // NONE | BY_NAME | BY_DATE | BY_DATE_AND_NAME
 const filterDate = "1970/01/19";
-const filterToken = "XRP";
+const filterToken = "BTC";
 
 const updateTokenAmount = (portfolio, token, amount, transactionType) => {
   switch (transactionType) {
@@ -34,7 +34,7 @@ const updateTokenAmount = (portfolio, token, amount, transactionType) => {
   }
 };
 
-getPortfolioAssets = async () => {
+const filterPortfolioAssets = async () => {
   console.time(filterType);
 
   const start = new Date(filterDate).getTime();
@@ -44,7 +44,7 @@ getPortfolioAssets = async () => {
   switch (filterType) {
     case FILTER.NONE:
       for await (const line of rl) {
-        const [transactionType, token, amount] = parseAllTokens(line);
+        const [transactionType, token, amount] = parseAll(line);
         if (amount && !portfolio[token]) {
           portfolio[token] = 0;
         }
@@ -86,9 +86,7 @@ getPortfolioAssets = async () => {
   }
 
   console.timeEnd(filterType);
-  // console.log("portfolio", portfolio);
-
   return portfolio;
 };
 
-module.exports = getPortfolioAssets;
+module.exports = filterPortfolioAssets;

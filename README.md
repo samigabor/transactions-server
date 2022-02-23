@@ -19,3 +19,18 @@ Portfolio means the balance of the token where you need to add deposits and subt
 ## Run the app:
 
 `npm run start`
+
+## Folder structure:
+
+- `api.js` - cryptocompare requests
+- `constants.js`
+- `filter-assets.js` - logic for assets filtering criteria
+- `parseline.js` - parsing logic for each csv line
+- `sample-data.js` - copied the first 1000 lines from the transactions.csv (~1GB)
+- `server.js` - the overall app level logic
+- `utils.js` - utilities functions
+
+## Design decisions
+
+- devided the app into dedicated module, each responsible for specific logic
+- used built-in file parsing packages (fs/readline) which minimises package dependencies

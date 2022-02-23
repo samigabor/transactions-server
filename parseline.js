@@ -3,7 +3,7 @@ const DELIMITER = ",";
 /**
  * @param line - has the form `1571967208,DEPOSIT,BTC,0.298660`
  */
-function parseAllTokens(line) {
+function parseAll(line) {
   const [_, transactionType, token, amount] = line.split(DELIMITER);
   if (!isNaN(amount)) {
     return [transactionType, token, +amount];
@@ -46,7 +46,7 @@ function isMatch(token, filterToken) {
 }
 
 module.exports = {
-  parseAllTokens,
+  parseAll,
   parseByName,
   parseByDate,
   parseByDateAndName,
